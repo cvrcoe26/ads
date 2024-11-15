@@ -9,6 +9,7 @@ public class OBST {
             w[i][i] = q[i];
             c[i][i] = 0;
             r[i][i] = 0;
+            System.out.println("c[" + i + "][" + i + "] = " + c[i][i] + ", w[" + i + "][" + i + "] = " + w[i][i] + ", r[" + i + "][" + i + "] = " + r[i][i]);
         }
         for (int length = 1; length <= n; length++) {
             for (int i = 0; i <= n - length; i++) {
@@ -25,26 +26,33 @@ public class OBST {
                 }
                 c[i][j] = minCost;
                 r[i][j] = root;
+                System.out.println("c[" + i + "][" + j + "] = " + c[i][j] + ", w[" + i + "][" + j + "] = " + w[i][j] + ", r[" + i + "][" + j + "] = " + r[i][j]);
             }
         }
         System.out.println("Minimum cost: " + c[0][n]);
     }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter the number of keys: ");
         int n = sc.nextInt();
+
         double[] p = new double[n + 1];
         double[] q = new double[n + 1];
+
         System.out.println("Enter probabilities for the keys:");
         for (int i = 1; i <= n; i++) {
             System.out.print("p[" + i + "]: ");
             p[i] = sc.nextDouble();
         }
+
         System.out.println("Enter probabilities for the dummy keys:");
         for (int i = 0; i <= n; i++) {
             System.out.print("q[" + i + "]: ");
             q[i] = sc.nextDouble();
         }
+
         bst(p, q, n);
+        sc.close();
     }
 }
