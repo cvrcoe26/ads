@@ -9,7 +9,7 @@ public class OBST {
             w[i][i] = q[i];
             c[i][i] = 0;
             r[i][i] = 0;
-            System.out.println("c[" + i + "][" + i + "] = " + c[i][i] + ", w[" + i + "][" + i + "] = " + w[i][i] + ", r[" + i + "][" + i + "] = " + r[i][i]);
+            System.out.printf("c[%d][%d] = %.2f, w[%d][%d] = %.2f, r[%d][%d] = %d%n", i, i, c[i][i], i, i, w[i][i], i, i, r[i][i]);
         }
         for (int length = 1; length <= n; length++) {
             for (int i = 0; i <= n - length; i++) {
@@ -26,7 +26,7 @@ public class OBST {
                 }
                 c[i][j] = minCost;
                 r[i][j] = root;
-                System.out.println("c[" + i + "][" + j + "] = " + c[i][j] + ", w[" + i + "][" + j + "] = " + w[i][j] + ", r[" + i + "][" + j + "] = " + r[i][j]);
+                System.out.printf("c[%d][%d] = %.2f, w[%d][%d] = %.2f, r[%d][%d] = %d%n", i, j, c[i][j], i, j, w[i][j], i, j, r[i][j]);
             }
         }
         System.out.println("Minimum cost: " + c[0][n]);
