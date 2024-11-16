@@ -22,8 +22,10 @@ stat_summary = df.describe(include='all')
 print("\nStatistical Summary:\n", stat_summary)
 
 plt.figure(figsize=(8, 6))
-sns.boxplot(data=df.select_dtypes(include=[np.number]))
-plt.title("Box Plot of Numeric Columns")
+sns.boxplot(data=df[['M1', 'PHY']])
+plt.title("Box Plot of M1 and PHY")
+plt.ylabel("Values")
+plt.xlabel("Fields")
 plt.show()
 
 plt.hist(df['M1'], bins=10, edgecolor='black', color='blue')
