@@ -17,6 +17,14 @@ df['Salary'].fillna(df['Salary'].mean(), inplace=True)
 df['Name'].fillna('Unknown', inplace=True)
 df.drop_duplicates(inplace=True)
 
+metadata = {
+    "Rows": df.shape[0],
+    "Columns": df.shape[1],
+    "Columns Info": df.dtypes,
+    "Null Values": df.isnull().sum()
+}
+print("\nDataset Metadata:\n", metadata)
+
 summary = df.describe()
 print("Statistical Summary:\n", summary)
 
