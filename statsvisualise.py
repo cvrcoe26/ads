@@ -3,57 +3,43 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-data = {
-    'ID': [1, 2, 3, 4, 5],
-    'Name': ['John Doe', 'Jane Smith', 'John Doe', 'Emily Wong', np.nan],
-    'Age': [28, np.nan, 28, 45, 35],
-    'Salary': [50000, 55000, 50000, np.nan, 60000],
-    'City': ['New York', 'San Francisco', 'New York', 'Los Angeles', 'Chicago']
-}
+df = pd.read_csv('sample.csv')
 
-df = pd.DataFrame(data)
-df['Age'].fillna(df['Age'].mean(), inplace=True)
-df['Salary'].fillna(df['Salary'].mean(), inplace=True)
-df['Name'].fillna('Unknown', inplace=True)
+df['M1'].fillna(df['M1'].mean(), inplace=True)
+df['PHY'].fillna(df['PHY'].mean(), inplace=True)
+
 df.drop_duplicates(inplace=True)
 
 metadata = {
-    "Rows": df.shape[0],
-    "Columns": df.shape[1],
-    "Columns Info": df.dtypes,
-    "Null Values": df.isnull().sum()
+    "Total Rows": df.shape[0],
+    "Total Columns": df.shape[1],
+    "Columns Info": df.dtypes.to_dict(),
+    "Missing Values": df.isnull().sum().to_dict()
 }
 print("\nDataset Metadata:\n", metadata)
 
-summary = df.describe()
-print("Statistical Summary:\n", summary)
-
-plt.plot(df['Age'], df['Salary'], color='green')
-plt.xlabel('Age')
-plt.ylabel('Salary')
-plt.title('Line Plot: Age vs Salary')
-plt.show()
-
-plt.scatter(df['Age'], df['Salary'])
-plt.xlabel('Age')
-plt.ylabel('Salary')
-plt.title('Scatter Plot: Age vs Salary')
-plt.show()
-
-plt.hist(df['Age'])
-plt.xlabel('Age')
-plt.ylabel('Frequency')
-plt.title('Histogram of Age')
-plt.show()
-
-plt.hist(df['Salary'], bins=10, edgecolor='black')
-plt.xlabel('Salary')
-plt.ylabel('Frequency')
-plt.title('Histogram of Salary')
-plt.show()
+stat_summary = df.describe(include='all')
+print("\nStatistical Summary:\n", stat_summary)
 
 plt.figure(figsize=(8, 6))
-sns.boxplot(data=df, y='Age', color='lightblue')
-plt.title('Box Plot of Age')
-plt.ylabel('Age')
+sns.boxplot(data=df.select_dtypes(include=[np.number]))
+plt.title("Box Plot of Numeric Columns")
+plt.show()
+
+plt.hist(df['M1'], bins=10, edgecolor='black', color='blue')
+plt.title("Histogram of M1")
+plt.xlabel('M1')
+plt.ylabel('Frequency')
+plt.show()
+
+plt.plot(df['M1'], df['PHY'], color='green', marker='o')
+plt.title("Line Plot: M1 vs PHY")
+plt.xlabel("M1")
+plt.ylabel("PHY")
+plt.show()
+
+plt.scatter(df['M1'], df['PHY'], color='red')
+plt.title("Scatter Plot: M1 vs PHY")
+plt.xlabel("M1")
+plt.ylabel("PHY")
 plt.show()
